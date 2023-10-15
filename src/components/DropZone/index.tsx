@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { ThumbsContainer, Thumb, ThumbInner, ThumbImg } from './style';
+import { DropZoneContainer, ThumbsContainer, Thumb, ThumbInner, ThumbImg } from './style';
 import type { File } from './types';
+import { Paragraph } from '@styles/Text';
 
-function Previews() {
+function DropZone() {
   const [files, setFiles] = useState<File[]>([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -16,7 +17,7 @@ function Previews() {
     }
   });
   
-  const thumbs = files.map(file => (
+  const thumbs = useMemo(() => files.map(file => (
     <Thumb key={file.name}>
       <ThumbInner>
         <ThumbImg
@@ -26,7 +27,7 @@ function Previews() {
         />
       </ThumbInner>
     </Thumb>
-  ));
+  )), [files])
 
   useEffect(() => {
     // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
@@ -35,10 +36,10 @@ function Previews() {
 
   return (
     <section className="container">
-      <div {...getRootProps({ className: 'dropzone' })}>
+      <DropZoneContainer {...getRootProps({ className: 'dropzone' })}>
         <input {...getInputProps()} />
-        <p>Adicione aqui as imagens do PDF</p>
-      </div>
+        <Paragraph $Margin="20px">Adicione aqui as imagens do PDF</Paragraph>
+      </DropZoneContainer>
       <ThumbsContainer>
         {thumbs}
       </ThumbsContainer>
@@ -46,4 +47,4 @@ function Previews() {
   );
 }
 
-export default Previews;
+export default DropZone;

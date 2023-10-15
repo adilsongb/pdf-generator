@@ -1,13 +1,13 @@
 import React from 'react';
 import { Container } from './style';
 import { Title } from '@styles/Text';
-import Previews from '@components/DropZone';
+import DropZone from '@components/DropZone';
 
 function FileUpload() {
   return (
     <Container>
-      <Title>Gerador de PDF</Title>
-      <Previews />
+      <Title style={{ textAlign: 'center' }}>Gerador de PDF</Title>
+      <DropZone />
     </Container>
   );
 }

@@ -1,4 +1,13 @@
+import Colors from '@styles/Colors';
 import styled from 'styled-components';
+
+const DropZoneContainer = styled.aside`
+  border: 2px dashed ${Colors.grayLight};
+  cursor: pointer;
+  text-align: center;
+  margin: 10px 0;
+  border-radius: 5px;
+`;
 
 const ThumbsContainer = styled.aside`
   display: flex;
@@ -29,4 +38,4 @@ const ThumbImg = styled.img`
   height: 100%;
 `;
 
-export { ThumbsContainer, Thumb, ThumbInner, ThumbImg };
+export { DropZoneContainer, ThumbsContainer, Thumb, ThumbInner, ThumbImg };

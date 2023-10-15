@@ -1,8 +1,16 @@
 import styled from 'styled-components';
+import Colors from './Colors';
+import type { Text } from './types';
 
-const Title = styled.h1`
-  margin: 0;
-  color: #454444;
+const Title = styled.h1<Text>`
+  margin: ${props => props.$Margin || 0};
+  color: ${props => props.$Color || Colors.grayDark};
 `;
 
-export { Title };
+const Paragraph = styled.p<Text>`
+  margin: ${props => props.$Margin || 0};
+  color: ${props => props.$Color || Colors.grayLight};
+  font-weight: bold;
+`;
+
+export { Title, Paragraph };
