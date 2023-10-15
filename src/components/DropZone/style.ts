@@ -7,6 +7,7 @@ const DropZoneContainer = styled.aside`
   text-align: center;
   margin: 10px 0;
   border-radius: 5px;
+  height: 240px;
 `;
 
 const ThumbsContainer = styled.aside`
@@ -18,12 +19,12 @@ const ThumbsContainer = styled.aside`
 
 const Thumb = styled.div`
   display: inline-flex;
-  border-radius: 2;
-  border: 5px solid #eaeaea;
-  margin-bottom: 8;
-  margin-right: 8;
-  padding: 4;
+  border-radius: 2px;
+  border: 2px solid ${Colors.grayLight};
+  margin: 8px;
   box-sizing: border-box;
+  width: 100px;
+  height: 100px;
 `;
 
 const ThumbInner = styled.div`
