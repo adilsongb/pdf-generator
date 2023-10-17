@@ -8,12 +8,15 @@ import {
   ThumbImg,
 } from './style';
 import { Paragraph } from '@styles/Text';
+import { Button, Loading } from '@styles/components';
 import generatePDF from '@utils/generatorPDF';
 import type { File } from 'types/dropzone';
 
 function DropZone() {
   const [pdfBlob, setPdfBlob] = useState<string | null>(null);
   const [files, setFiles] = useState<File[]>([]);
+  const [loading, setLoading] = useState(false);
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       'image/*': []
@@ -30,9 +33,16 @@ function DropZone() {
   });
 
   async function handleOnClick() {
+    if (loading) return;
+
+    setLoading(true)
     const pdfBlob = await generatePDF(files);
     
     setPdfBlob(pdfBlob);
+    
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
   }
 
   const thumbs = useMemo(() => files.map(file => (
@@ -60,17 +70,17 @@ function DropZone() {
           {thumbs}
         </ThumbsContainer>
       </DropZoneContainer>
-      <button onClick={handleOnClick}>
-        Gerar PDF
-      </button>
 
-      {pdfBlob && (
-        <div>
-          <h2>PDF Gerado:</h2>
+      {pdfBlob && !loading ? (
+        <Button>
           <a href={pdfBlob} target='_blank' rel="noreferrer">
             Baixar PDF
           </a>
-        </div>
+        </Button>
+      ) : (
+        <Button onClick={handleOnClick} disabled={!files.length}>
+          {loading ? <Loading /> : 'Gerar PDF'}
+        </Button>
       )}
     </section>
   );
