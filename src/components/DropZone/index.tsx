@@ -72,10 +72,8 @@ function DropZone() {
       </DropZoneContainer>
 
       {pdfBlob && !loading ? (
-        <Button>
-          <a href={pdfBlob} target='_blank' rel="noreferrer">
-            Baixar PDF
-          </a>
+        <Button as="a" target="_blank" rel="noreferrer" href={pdfBlob}>
+          Baixar PDF
         </Button>
       ) : (
         <Button onClick={handleOnClick} disabled={!files.length}>
